@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:to_do_list_application/constants/colors.dart';
 import '../model/todo.dart';
 import '../widgets/todo_item.dart';
-import 'package:to_do_list_application/screens/home.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -148,51 +147,52 @@ class _HomeState extends State<Home> {
     });
   }
 
-  AppBar _buildAppBar() {
-    return AppBar(
-      backgroundColor: tdBGColor,
-      elevation: 0,
-      title: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Icon(Icons.menu, color: tdBlack, size: 30),
-          Container(
-            height: 40,
-            width: 40,
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(20),
-              child: Image.asset('assets/images/avatar.jpeg'),
-            ),
+  Widget searchBox() {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 15),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: TextField(
+        onChanged: (value) => _runFilter(value),
+        decoration: InputDecoration(
+          contentPadding: EdgeInsets.all(0),
+          prefixIcon: Icon(
+            Icons.search,
+            color: tdBlack,
+            size: 20,
           ),
-        ],
+          prefixIconConstraints: BoxConstraints(
+            maxHeight: 20,
+            maxWidth: 25,
+          ),
+          border: InputBorder.none,
+          hintText: 'Search',
+          hintStyle: TextStyle(color: tdGrey),
+        ),
       ),
     );
   }
 }
 
-Widget searchBox() {
-  return Container(
-    padding: EdgeInsets.symmetric(horizontal: 15),
-    decoration: BoxDecoration(
-      color: Colors.white,
-      borderRadius: BorderRadius.circular(20),
-    ),
-    child: const TextField(
-      decoration: InputDecoration(
-        contentPadding: EdgeInsets.all(0),
-        prefixIcon: Icon(
-          Icons.search,
-          color: tdBlack,
-          size: 20,
+AppBar _buildAppBar() {
+  return AppBar(
+    backgroundColor: tdBGColor,
+    elevation: 0,
+    title: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Icon(Icons.menu, color: tdBlack, size: 30),
+        Container(
+          height: 40,
+          width: 40,
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(20),
+            child: Image.asset('assets/images/avatar.jpeg'),
+          ),
         ),
-        prefixIconConstraints: BoxConstraints(
-          maxHeight: 20,
-          maxWidth: 25,
-        ),
-        border: InputBorder.none,
-        hintText: 'Search',
-        hintStyle: TextStyle(color: tdGrey),
-      ),
+      ],
     ),
   );
 }
